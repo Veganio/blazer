@@ -259,14 +259,15 @@ module Blazer
           end
         end
 
-        respond_to do |format|
-          format.html do
-            render layout: false
-          end
-          format.csv do
-            send_data csv_data(@columns, @rows, @data_source), type: "text/csv; charset=utf-8; header=present", disposition: "attachment; filename=\"#{@query.try(:name).try(:parameterize).presence || 'query'}.csv\""
-          end
-        end
+        # respond_to do |format|
+        #   format.html do
+        #     render layout: false, template: 'run.html.erb'
+        #   end
+        #   format.csv do
+        #     send_data csv_data(@columns, @rows, @data_source), type: "text/csv; charset=utf-8; header=present", disposition: "attachment; filename=\"#{@query.try(:name).try(:parameterize).presence || 'query'}.csv\""
+        #   end
+        # end
+        render layout: false, template: 'blazer/queries/run.html.erb'
       end
 
       def set_queries(limit = nil)
